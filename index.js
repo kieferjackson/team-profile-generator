@@ -8,7 +8,7 @@ let employees = [];
 
 const employee_questions =
 [
-    // Employee Type
+    // Employee Role
     {
         type: 'list',
         message: 'Which of the following is your role?',
@@ -77,7 +77,7 @@ function createEmployee()
             {
                 const { office_number } = manager_answers;
                 // Instantiate the Manager and push to the employees array
-                employees.push( new Manager(name, id, email, office_number) );
+                employees.push( new tp.Manager(name, id, email, office_number) );
             });
             break;
 
@@ -85,7 +85,7 @@ function createEmployee()
             {
                 const { github } = engineer_answers;
                 // Instantiate the Manager and push to the employees array
-                employees.push( new Engineer(name, id, email, github) );
+                employees.push( new tp.Engineer(name, id, email, github) );
             });
             break;
 
@@ -93,11 +93,38 @@ function createEmployee()
             {
                 const { school } = intern_answers;
                 // Instantiate the Manager and push to the employees array
-                employees.push( new Intern(name, id, email, school) );
+                employees.push( new tp.Intern(name, id, email, school) );
             });
             break;
         }
     });
 }
 
-createEmployee()
+prompt_create();
+
+async function prompt_create()
+{
+    const employee_created = await createEmployee();
+    console.log(employee_created);
+
+    inq.prompt(
+        [
+            {
+                type: 'input',
+                message: 'Would you like to add another employee? (Y/N)',
+                name: 'confirmation'
+            }
+        ]
+    ).then( (answer) =>
+    {
+        const { confirmation } = answer;
+
+        // Returns true if 'y', false if otherwise
+        let repeat = confirmation.toLowerCase() === 'y';
+
+        if (repeat)
+            prompt_create();
+    });
+}
+
+console.log(employees);

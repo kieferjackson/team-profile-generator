@@ -1,4 +1,4 @@
-const Employee = require('../lib/classes');
+const tp = require('../lib/classes');
 
 describe('Employee Constructor', () => 
 {
@@ -6,7 +6,7 @@ describe('Employee Constructor', () =>
     const ID = 1;
     const EMAIL = 'ted@work.com';
 
-    const Ted = new Employee(NAME, ID, EMAIL);
+    const Ted = new tp.Employee(NAME, ID, EMAIL);
 
     it('should take have three properties: name, id, and email', () => 
     {
