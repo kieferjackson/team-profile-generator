@@ -1,5 +1,6 @@
 // Including Team Profile Classes
 const tp = require('./lib/classes');
+const gen_html = require('./lib/generateHTML');
 const inq = require('inquirer');
 const fs = require('fs');
 
@@ -131,6 +132,16 @@ function createEmployee()
                 else
                 {
                     console.log(employees);
+
+                    // Generate the base HTML
+                    const HTML = gen_html(employees);
+
+                    fs.writeFile
+                    (
+                        './dist/index.html', HTML,
+                        (error) => error ? console.log(error) : console.log('The file was successfully created!')
+                    )
+
                     return; 
                 }
             });
