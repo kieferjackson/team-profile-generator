@@ -78,53 +78,64 @@ function createEmployee()
                 const { office_number } = manager_answers;
                 // Instantiate the Manager and push to the employees array
                 employees.push( new tp.Manager(name, id, email, office_number) );
+
+                addEmployeePrompt();
             });
             break;
 
             case 'Engineer': inq.prompt(engineer_questions).then ( (engineer_answers) =>
             {
                 const { github } = engineer_answers;
-                // Instantiate the Manager and push to the employees array
+                // Instantiate the Engineer and push to the employees array
                 employees.push( new tp.Engineer(name, id, email, github) );
+
+                addEmployeePrompt();
             });
             break;
 
             case 'Intern': inq.prompt(intern_questions).then ( (intern_answers) =>
             {
                 const { school } = intern_answers;
-                // Instantiate the Manager and push to the employees array
+                // Instantiate the Intern and push to the employees array
                 employees.push( new tp.Intern(name, id, email, school) );
+
+                addEmployeePrompt();
             });
             break;
+        }
+
+        function addEmployeePrompt()
+        {
+            // Prompt the user to add another employee
+            inq.prompt(
+                [
+                    {
+                        type: 'input',
+                        message: 'Would you like to add another employee? (Y/N)',
+                        name: 'confirmation'
+                    }
+                ]
+            ).then( (answer) =>
+            {
+                const { confirmation } = answer;
+
+                // Returns true if 'y', false if otherwise
+                let repeat = confirmation.toLowerCase() === 'y';
+
+                if (repeat)
+                {
+                    console.log('================================================');
+                    createEmployee();
+                }
+
+                else
+                {
+                    console.log(employees);
+                    return; 
+                }
+            });
         }
     });
 }
 
-prompt_create();
-
-async function prompt_create()
-{
-    const employee_created = await createEmployee();
-    console.log(employee_created);
-
-    inq.prompt(
-        [
-            {
-                type: 'input',
-                message: 'Would you like to add another employee? (Y/N)',
-                name: 'confirmation'
-            }
-        ]
-    ).then( (answer) =>
-    {
-        const { confirmation } = answer;
-
-        // Returns true if 'y', false if otherwise
-        let repeat = confirmation.toLowerCase() === 'y';
-
-        if (repeat)
-            prompt_create();
-    });
-}
-
-console.log(employees);
+createEmployee();
