@@ -27,6 +27,12 @@ const employee_questions =
         message: 'What is your name?',
         name: 'name'
     },
+    // Employee ID
+    {
+        type: 'input',
+        message: 'What is your ID?',
+        name: 'id'
+    },
     // Email Address
     {
         type: 'input',
@@ -69,8 +75,7 @@ function createEmployee()
 {
     inq.prompt(employee_questions).then ( (answers) => 
     {
-        const { role, name, email } = answers;
-        const id = employees.length + 1;
+        const { role, name, id, email } = answers;
 
         switch (role)
         {

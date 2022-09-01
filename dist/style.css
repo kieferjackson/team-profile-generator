@@ -1,0 +1,12 @@
+body { margin: 0 }
+
+.profile_header
+{
+    padding: 50px;
+    text-align: center;
+    margin-bottom: 10px;
+
+    background-color: rgb(129, 255, 213);
+}
+
+.employees_container { margin: 0 auto }
