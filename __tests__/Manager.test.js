@@ -14,7 +14,7 @@ describe('Manager Constructor', () =>
         expect(Ted.getName()).toBe(NAME);
         expect(Ted.getId()).toBe(ID);
         expect(Ted.getEmail()).toBe(EMAIL);
-        expect(Ted.office_number).toBe(OFFICE_NUM);
+        expect(Ted.getOfficeNum()).toBe(OFFICE_NUM);
     });
 
     it('should return Intern when getRole() is called', () =>

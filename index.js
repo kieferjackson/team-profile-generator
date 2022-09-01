@@ -133,7 +133,7 @@ function createEmployee()
                 {
                     console.log(employees);
 
-                    // Generate the base HTML
+                    // Generate the HTML based on user input
                     const HTML = gen_html(employees);
 
                     fs.writeFile
